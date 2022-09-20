@@ -10,6 +10,7 @@ details: DETAIL,
     serevalCreate:`${DETAIL}/several`,
     update: DETAIL_ID,
     delete: DETAIL_ID,
+    backup: `${DETAIL}/backup`,
 }
 
 export default ROUTES_ENPOINT_DETAILS

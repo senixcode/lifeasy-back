@@ -2,8 +2,10 @@
   "tasks": [
     {
       "id": "a3d3b38e-cf62-4104-87af-17d4c7d82c23",
-      "amount": 3500,
-      "name": "Sueldo Mensual"
+      "amount": 3650,
+      "name": "Sueldo Mensual",
+      "type": "INCOME",
+      "level": 1
     },
     {
       "id": "c285974e-487d-440b-a401-1a69f54b7b1b",
@@ -11,6 +13,16 @@
       "level": 1,
       "amount": 230,
       "name": "Pasaje"
+    },
+    {
+      "id": "6c76dfc7-0527-4d5b-90b8-b020dd381765",
+      "type": "INCOME",
+      "level": 1,
+      "amount": 80,
+      "name": "Pago Mensual de Internet",
+      "description": "",
+      "alert": "",
+      "fecha": " 1993-01-23 10:43:55"
     }
   ]
 }
