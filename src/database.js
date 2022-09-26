@@ -1,4 +1,3 @@
-import mongoose from 'mongoose'
 import { Low, JSONFile } from 'lowdb'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -17,15 +16,15 @@ export async function createConnection() {
    await db.write()
 }
 
-export const mongoConnection = async () => {
-   try {
-      await mongoose.connect(process.env.URI_MONGO,
-         { useNewUrlParser: true, useUnifiedTopology: true }
-      )
-      console.log("Mongodb connected");
-   } catch (error) {
-      console.error(error);
-   }
-}
+// export const mongoConnection = async () => {
+//    try {
+//       await mongoose.connect(process.env.URI_MONGO,
+//          { useNewUrlParser: true, useUnifiedTopology: true }
+//       )
+//       console.log("Mongodb connected");
+//    } catch (error) {
+//       console.error(error);
+//    }
+// }
 
 export const getConnection = () => db
