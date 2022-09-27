@@ -6,7 +6,7 @@ export const getDetails = (req, res) => {
     res.status(200).json(details)
 }
 
-export const createDetails = async (req, res) => {
+export const createDetail = async (req, res) => {
 
     try {
         let { type, level, amount, ...rest } = req.body
