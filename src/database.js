@@ -12,7 +12,7 @@ export async function createConnection() {
 
    // logica para que cree y no subcriba los datos
    await db.read()
-   db.data ||= { tasks: [] }
+   db.data ||= { tasks: [], reports: [], }
    await db.write()
 }
 

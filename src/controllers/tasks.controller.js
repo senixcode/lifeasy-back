@@ -83,8 +83,9 @@ export const deleteDetails = async (req, res) => {
 export const savedReport = async (req, res) => {
     try {
         let { total } = req.body
-        if (total || typeof total != 'number')
+        if (!total || typeof total !== 'number')
             throw new Error('total is a numerical type and must not be empty.')
+
         const newField = {
             id: v4(),
             date: new Date(),
@@ -94,6 +95,7 @@ export const savedReport = async (req, res) => {
         db.data.reports.push(newField)
         await db.write()
         res.json(newField)
+
     } catch (error) {
         return res.status(500).send({ message: error.message })
     }
