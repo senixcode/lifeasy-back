@@ -6,47 +6,6 @@ export const getDetails = (req, res) => {
     res.status(200).json(details)
 }
 
-export const createSerevalDetails = async (req, res) => {
-
-    try {
-
-
-        if (!req.body?.length > 0)
-            throw new Error('Enter details')
-
-            let count = 0
-            for (const detail of req.body) {
-                count++
-                let { type, level, amount, ...rest } = detail
-                if (!type || !["INCOME", "EGRESS"].includes(type.toUpperCase()))
-                throw new Error(`Index:${count}, Enter a type can only add INCOME or EGRESS`)
-                if (!level || typeof level !== 'number')
-                throw new Error(`Index:${count}, Enter a level typeof number`)
-                if (!amount || typeof amount !== 'number')
-                throw new Error(`Index:${count}, Enter a amount typeof number`)
-                if (![1, 2, 3, 4].includes(level))
-                throw new Error(`Index:${count}, Enter level can only be 1 2 3 4`)
-                
-            const db = getConnection()
-            const newField = {
-                id: v4(),
-                type,
-                level,
-                amount,
-                ...rest
-            }
-
-            db.data.tasks.push(newField)
-            await db.write()
-        }
-
-        res.json(getConnection().data.tasks)
-
-    } catch (error) {
-        return res.status(500).send({ message: error.message })
-    }
-}
-
 export const createDetails = async (req, res) => {
 
     try {
@@ -121,7 +80,21 @@ export const deleteDetails = async (req, res) => {
 
 }
 
-export const countDetails = (req, res) => {
-    const tasks = getConnection().data.tasks.length
-    res.json(tasks)
+export const savedReport = async (req, res) => {
+    try {
+        let { total } = req.body
+        if (total || typeof total != 'number')
+            throw new Error('total is a numerical type and must not be empty.')
+        const newField = {
+            id: v4(),
+            date: new Date(),
+            total
+        }
+        const db = getConnection()
+        db.data.reports.push(newField)
+        await db.write()
+        res.json(newField)
+    } catch (error) {
+        return res.status(500).send({ message: error.message })
+    }
 }
