@@ -1,8 +1,8 @@
 
 import app from './app.js'
-import {createConnection} from './database.js'
+import { getStartMongoDB} from './database.js'
 
-createConnection()
+getStartMongoDB().catch(err => console.log(err));
 
 app.listen(app.get('port'))
 
