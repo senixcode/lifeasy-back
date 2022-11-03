@@ -1,10 +1,10 @@
-import EntriesModel from "../models/Entries.model.js"
+import DetailModel from "../models/Details.model.js"
 import RateController from "./rate.controller.js"
 import CategoryController from "./category.controller.js"
 
 class Detail {
     constructor() {
-        this.model = EntriesModel
+        this.model = DetailModel
         this.controllerRate = new RateController()
         this.controllerCategory = new CategoryController()
     }
