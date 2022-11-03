@@ -3,21 +3,28 @@ import { Categories, Details, Types } from '../const/models.const.js'
 
 const DetailSchema = new mongoose.Schema({
   name: String,
-  rates: [{ 
+  rates: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: Types
   }],
   mount: Number,
-  categories:  [{ 
+  categories: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: Categories
   }],
   description: String,
-},{
-    timestamps: {
-      createdAt: 'created_at', // Use `created_at` to store the created date
-      updatedAt: 'updated_at' // and `updated_at` to store the last updated date
-    }
+}, {
+  timestamps: {
+    createdAt: 'created_at', // Use `created_at` to store the created date
+    updatedAt: 'updated_at' // and `updated_at` to store the last updated date
+  }
 })
 
-  export default mongoose.model(Details, DetailSchema)
+DetailSchema.post('find', async function (docs) {
+  for (let doc of docs) {
+    if (doc?.rates.length >= 1) await doc.populate('rates')
+    if (doc?.categories.length >= 1) await doc.populate('categories')
+  }
+})
+
+export default mongoose.model(Details, DetailSchema)
