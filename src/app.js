@@ -4,6 +4,8 @@ import morgan from 'morgan'
 import RateRoute from './routes/rate.route.js'
 import CategoryRoute from './routes/category.route.js'
 import EntriesRoute from './routes/entries.route.js'
+import DetailRoute from './routes/detail.route.js'
+
 import cors from 'cors'
 dotenv.config()
 
@@ -18,5 +20,6 @@ app.set('port', process.env.PORT)
 app.use("/api/rate", RateRoute)
 app.use("/api/category", CategoryRoute)
 app.use("/api/entries", EntriesRoute)
+app.use("/api/details", DetailRoute)
 
 export default app
