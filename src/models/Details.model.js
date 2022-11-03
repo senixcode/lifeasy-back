@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
-import { Categories, Details, Types } from '../const/models.const.js'
+import { Categories, Details, Rates } from '../const/models.const.js'
 
 const DetailSchema = new mongoose.Schema({
   name: String,
   rates: [{
     type: mongoose.Schema.Types.ObjectId,
-    ref: Types
+    ref: Rates
   }],
   mount: Number,
   categories: [{
