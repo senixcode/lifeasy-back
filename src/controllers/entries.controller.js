@@ -1,44 +1,41 @@
-import CategoryModel from "../models/Categories.model.js"
+import EntriesModel from "../models/Entries.model.js"
+import RateController from "../controllers/rate.controller.js"
+import CategoryController from "../controllers/category.controller.js"
 
 class Type {
     constructor() {
-        this.model = CategoryModel
+        this.model = EntriesModel
+        this.controllerRate = new RateController()
+        this.controllerCategory = new CategoryController()
     }
 
     async list(_, res) {
         try {
-            const record = await this.model.find()
-            res.json(record)
+            const all = await this.model.find()
+            res.json(all)
         } catch (error) {
             res.status(400).json({ statusMessage: error })
         }
     }
-    async isFindAllById(items) {
-        try {
-            if (items)
-                for (const idRate of items) {
-                    const find = await this.model.findById(idRate)
-                    if (find?.errors) return true
-                }
-            return false
-        } catch (error) {
-            return error
-        }
-    }
-
     async create(req, res) {
         try {
+            const { rates, categories } = req.body
+            const ratesFindById = await this.controllerRate.isFindAllById(rates)
+            const categoriesFindById = await this.controllerRate.isFindAllById(categories)
+
+            if (ratesFindById) res.json({ message: "no found rates by Id", rates })
+            if (categoriesFindById) res.json({ message: "no found categories by Id", categories })
+
             const record = new this.model(req.body)
             await record.save()
             res.json(record)
         } catch (error) {
-            res.status(400).json({ statusMessage: error })
+            res.status(400).json({ statusMessage: error.message })
         }
     }
     async update(req, res) {
         try {
             const { id } = req.params
-            console.log(req.params);
             let updated = await this.model.findOneAndUpdate(id, req.body, {
                 new: true
             });

@@ -1,51 +1,62 @@
 import RateModel from "../models/Rates.model.js"
 
-class Type {
-    constructor(){
+class Rate {
+    constructor() {
         this.model = RateModel
     }
 
-    async list(_ , res){
+    async list(_, res) {
         try {
             const record = await this.model.find()
             res.json(record)
         } catch (error) {
-            res.status(400).json({statusMessage: error})
+            res.status(400).json({ statusMessage: error })
         }
     }
-    async create(req, res){
+    async isFindAllById(items) {
+        try {
+            if (items)
+                for (const idRate of items) {
+                    const find = await this.model.findById(idRate)
+                    if (find?.errors) return true
+                }
+            return false
+        } catch (error) {
+            return error
+        }
+    }
+    async create(req, res) {
         try {
             const record = new this.model(req.body)
             await record.save()
             res.json(record)
         } catch (error) {
-            res.status(400).json({statusMessage: error})
+            res.status(400).json({ statusMessage: error })
         }
     }
-    async update(req, res){
+    async update(req, res) {
         try {
-            const {id} = req.params
-            console.log(req.params);
+            const { id } = req.params
             let updated = await this.model.findOneAndUpdate(id, req.body, {
                 new: true
             });
             res.json(updated)
         } catch (error) {
-            res.status(400).json({statusMessage: error})
+            res.status(400).json({ statusMessage: error })
         }
     }
-    async delete(req, res){
+    async delete(req, res) {
         try {
-            const {id} = req.params
+            const { id } = req.params
             let deleted = await this.model.findByIdAndDelete(id)
             res.json(deleted)
         } catch (error) {
-            res.status(400).json({statusMessage: error})
+            res.status(400).json({ statusMessage: error })
         }
     }
 }
 
-export default Type
+export default Rate
 
 // export const createDetail = async (req, res) => {
 //     try {
