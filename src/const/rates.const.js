@@ -4,7 +4,8 @@ const LIST_RATES = {
     savings: "SAVING",//ahorro
     wish: 'WISH',//deseo
     debt: 'DEBT',//deuda
-    loans: 'LOANS'//prestamo
+    loans: 'LOANS',//prestamo
+    refund: 'REFUND'//devolución
 }
 
 export default LIST_RATES
