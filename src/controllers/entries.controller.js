@@ -2,7 +2,7 @@ import EntriesModel from "../models/Entries.model.js"
 import RateController from "../controllers/rate.controller.js"
 import CategoryController from "../controllers/category.controller.js"
 
-class Type {
+class Entry {
     constructor() {
         this.model = EntriesModel
         this.controllerRate = new RateController()
@@ -10,7 +10,7 @@ class Type {
     }
 
     async list(_, res) {
-        try {
+        try {                                                                                                                                                                                                            
             const all = await this.model.find()
             res.json(all)
         } catch (error) {
@@ -36,6 +36,13 @@ class Type {
     async update(req, res) {
         try {
             const { id } = req.params
+            const { rates, categories } = req.body
+            const ratesFindById = await this.controllerRate.isFindAllById(rates)
+            const categoriesFindById = await this.controllerRate.isFindAllById(categories)
+
+            if (ratesFindById) res.json({ message: "no found rates by Id", rates })
+            if (categoriesFindById) res.json({ message: "no found categories by Id", categories })
+
             let updated = await this.model.findOneAndUpdate(id, req.body, {
                 new: true
             });
@@ -55,4 +62,4 @@ class Type {
     }
 }
 
-export default Type
+export default Entry
