@@ -17,6 +17,20 @@ class Detail {
             res.status(400).json({ statusMessage: error })
         }
     }
+
+    async isFindAllById(items) {
+        try {
+            if (items)
+                for (const id of items) {
+                    const find = await this.model.findById(id)
+                    if (find?.errors) return true
+                }
+            return false
+        } catch (error) {
+            return error
+        }
+    }
+
     async create(req, res) {
         try {
             const { rates, categories } = req.body
@@ -33,6 +47,7 @@ class Detail {
             res.status(400).json({ statusMessage: error.message })
         }
     }
+
     async update(req, res) {
         try {
             const { id } = req.params
@@ -51,6 +66,7 @@ class Detail {
             res.status(400).json({ statusMessage: error })
         }
     }
+
     async delete(req, res) {
         try {
             const { id } = req.params
@@ -60,6 +76,7 @@ class Detail {
             res.status(400).json({ statusMessage: error })
         }
     }
+
 }
 
 export default Detail
