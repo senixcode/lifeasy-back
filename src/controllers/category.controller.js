@@ -13,11 +13,12 @@ class Type {
             res.status(400).json({ statusMessage: error })
         }
     }
+
     async isFindAllById(items) {
         try {
             if (items)
-                for (const idRate of items) {
-                    const find = await this.model.findById(idRate)
+                for (const id of items) {
+                    const find = await this.model.findById(id)
                     if (find?.errors) return true
                 }
             return false
@@ -35,6 +36,7 @@ class Type {
             res.status(400).json({ statusMessage: error })
         }
     }
+
     async update(req, res) {
         try {
             const { id } = req.params
@@ -47,6 +49,7 @@ class Type {
             res.status(400).json({ statusMessage: error })
         }
     }
+
     async delete(req, res) {
         try {
             const { id } = req.params
