@@ -3,6 +3,7 @@ const LIST_CATEGORIES = {
     food: 'FOOD',//comida
     outings: "OUTINGS",//saidas
     fothersMoney: "FATHER_MONEY",//dinero de mi padre
+    transference: "TRANSFERENCE",//dinero de mi padre
 }
 
 export default LIST_CATEGORIES
