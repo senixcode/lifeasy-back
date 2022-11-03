@@ -21,7 +21,7 @@ class Entry {
         try {
             const { rates, categories } = req.body
             const ratesFindById = await this.controllerRate.isFindAllById(rates)
-            const categoriesFindById = await this.controllerRate.isFindAllById(categories)
+            const categoriesFindById = await this.controllerCategory.isFindAllById(categories)
 
             if (ratesFindById) res.json({ message: "no found rates by Id", rates })
             if (categoriesFindById) res.json({ message: "no found categories by Id", categories })
@@ -38,7 +38,7 @@ class Entry {
             const { id } = req.params
             const { rates, categories } = req.body
             const ratesFindById = await this.controllerRate.isFindAllById(rates)
-            const categoriesFindById = await this.controllerRate.isFindAllById(categories)
+            const categoriesFindById = await this.controllerCategory.isFindAllById(categories)
 
             if (ratesFindById) res.json({ message: "no found rates by Id", rates })
             if (categoriesFindById) res.json({ message: "no found categories by Id", categories })
